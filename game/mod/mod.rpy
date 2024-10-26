@@ -22,7 +22,7 @@ init -500 python:
 
 init python:
     if JGSLoadable("music_room") and JGSLoadable("music_room_screen"):
-        shortcuts = """
+        shortcuts = _("""
             {size=75}{color=FB4301}JiG{/color}{color=#000}SaW{/color} Mod Shortcuts{/size}
 
             Toggle Choice Hotkeys: {color=FB4301}C{/color}
@@ -34,9 +34,9 @@ init python:
             Toggle Walkthrough Choice Tooltips: {color=FB4301}Shift+T{/color}
             Toggle Music Room: {color=FB4301}M{/color}
             Toggle Notifications Stack/Standard: {color=FB4301}N{/color}
-            """
+            """)
     else:
-        shortcuts = """
+        shortcuts = _("""
             {size=75}{color=FB4301}JiG{/color}{color=#000}SaW{/color} Mod Shortcuts{/size}
 
             Toggle Choice Hotkeys: {color=FB4301}C{/color}
@@ -47,11 +47,11 @@ init python:
             Toggle Walkthrough: {color=FB4301}W{/color}
             Toggle Walkthrough Choice Tooltips: {color=FB4301}Shift+T{/color}
             Toggle Notifications Stack/Standard: {color=FB4301}N{/color}
-            """
+            """)
 
-    wt_choice_tooltip = """Each Choice marked with either Good Choice/Bad Choice is
+    wt_choice_tooltip = _("""Each Choice marked with either Good Choice/Bad Choice is
         just a recommendation from me.
-        You play the game the way you want."""
+        You play the game the way you want.""")
 
 init 10 python:
     def switch_Textbox_visibility():
@@ -309,9 +309,9 @@ init -5 python:
             # Restart interaction if needed
             renpy.restart_interaction()
             if main_menu and not self.bypass:
-                renpy.notify("Changed Effect to: %s"%persistent._slow_effect_title)
+                renpy.notify(_("Changed Effect to: %s"%persistent._slow_effect_title))
             if not main_menu:
-                renpy.notify("Changed Effect to: %s"%persistent._slow_effect_title)
+                renpy.notify(_("Changed Effect to: %s"%persistent._slow_effect_title))
 
             #return persistent._slow_effect_title
 
@@ -351,9 +351,9 @@ init -5 python:
             # Restart interaction if needed
             renpy.restart_interaction()
             if main_menu and not self.bypass:
-                renpy.notify("Changed Always Effect to: %s"%persistent._always_effect_title)
+                renpy.notify(_("Changed Always Effect to: %s"%persistent._always_effect_title))
             if not main_menu:
-                renpy.notify("Changed Always Effect to: %s"%persistent._always_effect_title)
+                renpy.notify(_("Changed Always Effect to: %s"%persistent._always_effect_title))
                 
 
             #return persistent._always_effect_title
@@ -427,6 +427,8 @@ init -5 python:
                 return str(renpy.get_widget(self.screen_name,self.input_id).content)
 
     def toggle_callstack():
+        if not jgs_develop:
+            return
         if main_menu:
             return
         renpy.run(ToggleScreen("callstack", transition=dissolve))
@@ -497,11 +499,11 @@ init -5 python:
         if persistent._notify_custom:
             persistent._notify_custom = False
             config.notify = renpy.display_notify
-            renpy.notify("Custom Notifications Off")
+            renpy.notify(_("Custom Notifications Off"))
         else:
             persistent._notify_custom = True
             config.notify = add_notify_message
-            renpy.notify("Custom Notifications On")
+            renpy.notify(_("Custom Notifications On"))
         
         renpy.restart_interaction()
 
@@ -553,9 +555,20 @@ init -5 python:
 
     config.hyperlink_handlers["#"] = NoneHandler
 
+    def set_initial_volumes(mixer="music", v=.5):
+        try:
+            _preferences.set_mixer(mixer, v)
+        except:
+            _preferences.set_volume(mixer, v)
+
 define config.label_overrides["splashscreen"] = "splashscreen_jgs"
 
 label splashscreen_jgs:
+    if not persistent._jgs_default_volumes:
+        $ persistent._jgs_default_volumes = True
+        $ set_initial_volumes("music")
+        $ set_initial_volumes("sfx")
+        $ set_initial_volumes("voice")
     scene grey with dissolve
 
     if not steam_build:
@@ -598,7 +611,7 @@ init 1:
     default persistent._sharing_content = False
 
     default _go_to_page = ""
-    default jg_s = "{size=40}"
+    default jg_s = "{size=20}"
     default jg_1 = "{color=#FB4301}"
     default jg_2 = "{color=#000000}"
     default jg_3 = "{/color}"
@@ -608,6 +621,9 @@ init 1:
     default notify_history_length = 5
 
 init python:
+    if renpy.version_tuple[:-1] >= (7,5,0) or renpy.version_tuple[:-1] >= (8,0,0):
+        preferences.audio_when_minimized = False
+
     def read_rpy_file(file):
         try:
             with renpy.open_file(file, encoding="utf-8") as readfile:

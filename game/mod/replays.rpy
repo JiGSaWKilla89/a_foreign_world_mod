@@ -28,47 +28,47 @@ init python:
 define replay_1 = ReplayData(
     "d1_tracy_fantasy_15_01", 
     "galleryscene1", 
-    "Tracy Fantasy",
+    _("Tracy Fantasy"),
     scope={"MC" : persistent._replay_name})
 define replay_2 = ReplayData(
     "d2_fantasy_esther_11", 
     "galleryscene2", 
-    "Fantasy Esther",
+    _("Fantasy Esther"),
     scope={"MC" : persistent._replay_name})
 define replay_3 = ReplayData(
     "d3_fantasy_sue_14_01", 
     "galleryscene3", 
-    "Fantasy Sue",
+    _("Fantasy Sue"),
     scope={"MC" : persistent._replay_name})
 define replay_4 = ReplayData(
     "d4_sex_03", 
     "galleryscene4", 
-    "Sue Pool",
+    _("Sue Pool"),
     scope={"MC" : persistent._replay_name})
 define replay_5 = ReplayData(
     "d5_morning_03_01", 
     "galleryscene5", 
-    "Sue Handjob",
+    _("Sue Handjob"),
     scope={"MC" : persistent._replay_name})
 define replay_6 = ReplayData(
     "d5_fiona_memory_19", 
     "galleryscene6", 
-    "Fiona Memory",
+    _("Fiona Memory"),
     scope={"MC" : persistent._replay_name})
 define replay_7 = ReplayData(
     "d9_tracy_sex_55", 
     "galleryscene7", 
-    "Tracy Sex",
+    _("Tracy Sex"),
     scope={"MC" : persistent._replay_name})
 define replay_8 = ReplayData(
     "d9_sue_sex_08", 
     "galleryscene8", 
-    "Sue Sex",
+    _("Sue Sex"),
     scope={"MC" : persistent._replay_name})
 define replay_9 = ReplayData(
     "d10_threesome_18", 
     "galleryscene9", 
-    "Threesome",
+    _("Threesome"),
     scope={"MC" : persistent._replay_name})
             
 
@@ -84,7 +84,7 @@ screen replays():
     $ tooltip = GetTooltip()
     style_prefix "replays"
     tag menu
-    use game_menu("Replays", scroll="viewport"):
+    use game_menu(_("Replays"), scroll="viewport"):
 
         vpgrid:
             cols 3
@@ -96,24 +96,24 @@ screen replays():
                     imagebutton:
                         idle replay.idle
                         hover replay.hover
-                        action Replay(replay.label, scope=replay.scope, locked=replay.locked)
+                        action Replay(replay.label, scope=replay.scope, locked=replay.locked) tooltip replay.description
                     text replay.title
 
     if tooltip:
-            ## Use With Renpy Version Below 7.5 and 8.0
-            #frame:
-            #    style_prefix "tooltip"
-            #    hbox:
-            #        text tooltip
-            ## Use With Renpy Version Above 7.5 and 8.0
-            nearrect:
-                focus "tooltip"
-                prefer_top True
-                frame:
-                    at choice_appear(.5)
-                    style_prefix "tooltip"
-                    hbox:
-                        text tooltip
+        ## Use With Renpy Version Below 7.5 and 8.0
+        #frame:
+        #    style_prefix "tooltip"
+        #    hbox:
+        #        text tooltip
+        ## Use With Renpy Version Above 7.5 and 8.0
+        nearrect:
+            focus "tooltip"
+            prefer_top True
+            frame:
+                at choice_appear(.5)
+                style_prefix "tooltip"
+                hbox:
+                    text tooltip
 
 
 label galleryscene1:

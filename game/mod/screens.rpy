@@ -1,7 +1,7 @@
 init 5:# Screens
 
     screen navigation():
-
+        $ screen_vis = renpy.get_screen("color_picker_mr") or renpy.get_screen("color_picker_wt")#If(renpy.get_screen("color_picker_mr"),Hide("color_picker_mr",transition=dissolve))
         vbox:
             style_prefix "navigation"
             xpos gui.navigation_xpos
@@ -12,66 +12,66 @@ init 5:# Screens
                     pos (-10, 0)
                     idle "gui/overlay/main_menu_button_start_idle.png"
                     hover "gui/overlay/main_menu_button_start_hover.png"
-                    action Start()
+                    action Start(),If(screen_vis,[Hide("color_picker_mr",transition=dissolve),Hide("color_picker_wt",transition=dissolve)])
             else:
                 imagebutton:
                     pos (-10, 0)
                     idle "gui/overlay/main_menu_button_menu_idle.png"
                     hover "gui/overlay/main_menu_button_menu_hover.png"
-                    action MainMenu()
+                    action MainMenu(),If(screen_vis,[Hide("color_picker_mr",transition=dissolve),Hide("color_picker_wt",transition=dissolve)])
 
                 imagebutton:
                     pos (-10, 0)
                     idle "gui/overlay/main_menu_button_save_idle.png"
                     hover "gui/overlay/main_menu_button_save_hover.png"
-                    action ShowMenu("save")
+                    action ShowMenu("save"),If(screen_vis,[Hide("color_picker_mr",transition=dissolve),Hide("color_picker_wt",transition=dissolve)])
 
             imagebutton:
                 pos (-10, 0)
                 idle "gui/overlay/main_menu_button_load_idle.png"
                 hover "gui/overlay/main_menu_button_load_hover.png"
-                action ShowMenu("load")
+                action ShowMenu("load"),If(screen_vis,[Hide("color_picker_mr",transition=dissolve),Hide("color_picker_wt",transition=dissolve)])
 
             imagebutton:
                 pos (-10, 0)
                 idle "gui/overlay/main_menu_button_preferences_idle.png"
                 hover "gui/overlay/main_menu_button_preferences_hover.png"
-                action ShowMenu("preferences")
+                action ShowMenu("preferences"),If(screen_vis,[Hide("color_picker_mr",transition=dissolve),Hide("color_picker_wt",transition=dissolve)])
 
             if JGSLoadable("music_room") and JGSLoadable("music_room_screen"):
                 imagebutton:
                     pos (-10, 0)
                     idle "mod/images/main_menu_button_music_idle.png"
                     hover "mod/images/main_menu_button_music_hover.png"
-                    action ShowMenu("musicroom")
+                    action ShowMenu("musicroom"),If(screen_vis,[Hide("color_picker_mr",transition=dissolve),Hide("color_picker_wt",transition=dissolve)])
             
             if JGSLoadable("replays") and not _in_replay:
                 imagebutton:
                     pos (-10, 0)
                     idle "mod/images/main_menu_button_replays_idle.png"
                     hover "mod/images/main_menu_button_replays_hover.png"
-                    action ShowMenu("replays")
+                    action ShowMenu("replays"),If(screen_vis,[Hide("color_picker_mr",transition=dissolve),Hide("color_picker_wt",transition=dissolve)])
 
             if _in_replay:
                 imagebutton:
                     pos (-10, 0)
                     idle "mod/images/main_menu_button_end_replay_idle.png"
                     hover "mod/images/main_menu_button_end_replay_hover.png"
-                    action EndReplay(confirm=True)
+                    action EndReplay(confirm=True),If(screen_vis,[Hide("color_picker_mr",transition=dissolve),Hide("color_picker_wt",transition=dissolve)])
 
 
             imagebutton:
                 pos (-10, 0)
                 idle "gui/overlay/main_menu_button_about_idle.png"
                 hover "gui/overlay/main_menu_button_about_hover.png"
-                action ShowMenu("about")
+                action ShowMenu("about"),If(screen_vis,[Hide("color_picker_mr",transition=dissolve),Hide("color_picker_wt",transition=dissolve)])
 
             if renpy.variant("pc"):
                 imagebutton:
                     pos (-10, 0)
                     idle "gui/overlay/main_menu_button_quit_idle.png"
                     hover "gui/overlay/main_menu_button_quit_hover.png"
-                    action Quit(confirm=not main_menu)
+                    action Quit(confirm=not main_menu),If(screen_vis,[Hide("color_picker_mr",transition=dissolve),Hide("color_picker_wt",transition=dissolve)])
 
     screen main_menu():
         use mod_check()
@@ -162,21 +162,21 @@ init 5:# Screens
                     outlines [ (absolute(2), "#0d0d0d", absolute(1), absolute(1)) ]
                     kerning 52
 
-        $ mod_version = "Mod Compatible" if gui.jg_mod_version == config.version else "Mod Incompatible"
         vbox:
             xalign 1.0
-            text "{b}{u}[jg_1]JiG[jg_3][jg_2]SaW[jg_3]{/u}{/b}\nMOD Installed":
+            text _("{b}{u}[jg_1]JiG[jg_3][jg_2]SaW[jg_3]{/u}{/b}\nMOD Installed"):
                 size gui.mod_info_size
-                outlines [(2, "#0009", 1, 1)]
+                outlines [(2, "#fff9", 1, 1)]
                 text_align 0.5
+                font "mod/CM-Font.otf"
 
-            textbutton "[mod_version!i]":
+            textbutton _("Mod Features"):
                 xalign 1.0
                 text_size gui.text_size
                 text_outlines [(2, "#0009", 1, 1)]
                 text_align 1.0
                 action ShowMenu("mod_features")
-                tooltip "Click me to view mod features"
+                tooltip _("Click me to view mod features")
     
             if mod_updated[0] not in ["Mod up-to-date", "JSON Error", "Could Not Connect to Host", "HTTP Error", "Timeout", "Request Error", "None"]:
                 textbutton ("%s"%"Update Available" if mod_updated[0] != "Game Version Newer Than Mod" else "Check for updated mod"):
@@ -185,7 +185,7 @@ init 5:# Screens
                     text_outlines [(2, "#0009", 1, 1)]
                     text_align 1.0
                     action OpenURL(gui.mod_update_url)
-                    tooltip "Click me to get updated mod"
+                    tooltip _("Click me to get updated mod")
                 if mod_changelog:
                     textbutton "Mod Changelog":
                         xalign 1.0
@@ -193,7 +193,7 @@ init 5:# Screens
                         text_outlines [(2, "#0009", 1, 1)]
                         text_align 1.0
                         action ShowMenu("mod_changelog")
-                        tooltip "View Mod Changelog"
+                        tooltip _("View Mod Changelog")
 
         if tooltip:
             ## Use With Renpy Version Below 7.5 and 8.0
@@ -284,7 +284,7 @@ init 5:# Screens
                 action SetLocalVariable("shown", False),With(dissolve)
             key "game_menu" action SetLocalVariable("shown", False),With(dissolve)
 
-            text "Click anywhere to close or the ? button" align (0.98, 0.98)
+            text _("Click anywhere to close or the ? button") align (0.98, 0.98)
 
         if show_button:
             textbutton "?" action ToggleLocalVariable("shown"),With(dissolve) align (1.0, 0.05)
@@ -293,7 +293,7 @@ init 5:# Screens
         $ tooltip = GetTooltip()
         tag menu
 
-        use game_menu("Mod Changelog".capitalize(), scroll="viewport"):
+        use game_menu(_("Mod Changelog"), scroll="viewport"):
             vbox:
                 spacing 10
                 for i in mod_changelog:
@@ -306,15 +306,15 @@ init 5:# Screens
         $ tooltip = GetTooltip()
         tag menu
 
-        use game_menu("Mod Features".capitalize(), scroll="viewport"):
+        use game_menu(_("Mod Features"), scroll="viewport"):
             vbox:
                 spacing 10
                 if gui.jg_mod_version == config.version:
                     use mod_options_text
                 else:
-                    text "Mod is outdated {a=gui.mod_update_url}Click Here{/a} to Check for New Version"
-                    text "Most mod options will work"
-                    text ""
+                    text _("Mod is outdated {a=gui.mod_update_url}Click Here{/a} to Check for New Version")
+                    text _("Most mod options will work")
+                    null height 20
                     use mod_options_text
                     
         if tooltip:
@@ -334,32 +334,34 @@ init 5:# Screens
                         text tooltip
 
     screen mod_options_text():
-        text "Report any issues you find with the mod {a=[gui.mod_issues]}Here{/a}"
+        text _("Report any issues you find with the mod {a=[gui.mod_issues]}Here{/a}") tooltip _("Github issues tracker")
         text "Walkthrough"
-        text "1. Walkthrough Suggestions Toggled using {a=#:None}{color=#f00}(W){/color}{/a} or in preferences menu" xoffset 50 tooltip "This can be toggled in the main menu or in the game"
-        text "2. Walkthrough Tooltips Toggled using {a=#:None}{color=#f00}(Shift+T){/color}{/a} or in preferences menu" xoffset 50 tooltip "This can be toggled in the main menu or in the game"
+        text _("1. Walkthrough Suggestions Toggled using {a=#:None}{color=#f00}(W){/color}{/a} or in preferences menu") xoffset 50 tooltip _("This can be toggled in the main menu or in the game")
+        text _("2. Walkthrough Tooltips Toggled using {a=#:None}{color=#f00}(Shift+T){/color}{/a} or in preferences menu") xoffset 50 tooltip _("This can be toggled in the main menu or in the game")
         if JGSLoadable("music_room") and JGSLoadable("music_room_screen"):
-            text "Music Player"
-            text "1. Music Player can be Toggled ingame using {a=#:None}{color=#f00}(M){/color}{/a}" xoffset 50 tooltip "This can be toggled in the main menu or in the game"
-            text "2. Hovering over Volume Slider allows mousewheel up/down control" xoffset 50
+            text _("Music Player")
+            text _("1. Music Player can be Toggled ingame using {a=#:None}{color=#f00}(M){/color}{/a}") xoffset 50 tooltip _("This can be toggled in the main menu or in the game")
+            text _("2. Hovering over Volume Slider allows mousewheel up/down control") xoffset 50
         text "Say Dialogue"
-        text "1. Fancy Text Toggled using {a=#:None}{color=#f00}(F){/color}{/a} or in preferences menu" xoffset 50 tooltip "This can be toggled in the main menu or in the game"
-        text "2. Text Effect Toggled using {a=#:None}{color=#f00}(E){/color}{/a} or in preferences menu" xoffset 50 tooltip "This can be toggled in the main menu or in the game"
-        text "3. Text Always Effect Toggled using {a=#:None}{color=#f00}(R){/color}{/a} or in preferences menu" xoffset 50 tooltip "This can be toggled in the main menu or in the game"
-        text "Credit to {a=https://github.com/yukinogatari/Ren-Py-FancyText}yukinogatari{/a} for the original Fancytext Module Modified by\n[gui.mod_dev] for newer Ren'Py Compatibility" xoffset 50 tooltip "yukinogatari Github"
-        text "Custom Save Names"
-        text "1. Toggle Custom Savenames using {a=#:None}{color=#f00}(Shift+S){/color}{/a} or in preferences menu" xoffset 50 tooltip "This can be toggled in the main menu or in the game"
-        text "Hotkeys"
-        text "1. Toggle Choice Hotkeys using {a=#:None}{color=#f00}(C){/color}{/a} or in preferences menu" xoffset 50 tooltip "This can be toggled in the main menu or in the game"
-        text "Notifications"
-        text "1. Toggle Notification Stack/Standard using {a=#:None}{color=#f00}(N){/color}{/a} or in preferences menu" xoffset 50 tooltip "This can be toggled in the main menu or in the game"
-        text "Credit to {a=https://github.com/RenpyRemix/multi-notify}RenpyRemix{/a} for stackable notifications" xoffset 50 tooltip "RenpyRemix Github"
-        text "Credit to {a=https://github.com/valery-iwanofu/renpy-shader-collection}valery-iwanofu{/a} for color picker" xoffset 50 tooltip "valery-iwanofu Github"
+        text _("1. Fancy Text Toggled using {a=#:None}{color=#f00}(F){/color}{/a} or in preferences menu") xoffset 50 tooltip _("This can be toggled in the main menu or in the game")
+        text _("2. Text Effect Toggled using {a=#:None}{color=#f00}(E){/color}{/a} or in preferences menu") xoffset 50 tooltip _("This can be toggled in the main menu or in the game")
+        text _("3. Text Always Effect Toggled using {a=#:None}{color=#f00}(R){/color}{/a} or in preferences menu") xoffset 50 tooltip _("This can be toggled in the main menu or in the game")
+        text _("Credit to {a=https://github.com/yukinogatari/Ren-Py-FancyText}yukinogatari{/a} for the original Fancytext Module Modified by\n[gui.mod_dev] for newer Ren'Py Compatibility") xoffset 50 tooltip _("yukinogatari Github")
+        text _("Custom Save Names")
+        text _("1. Toggle Custom Savenames using {a=#:None}{color=#f00}(Shift+S){/color}{/a} or in preferences menu") xoffset 50 tooltip _("This can be toggled in the main menu or in the game")
+        text _("Hotkeys")
+        text _("1. Toggle Choice Hotkeys using {a=#:None}{color=#f00}(C){/color}{/a} or in preferences menu") xoffset 50 tooltip _("This can be toggled in the main menu or in the game")
+        text _("2. Hotkeys on Choice Menus using {a=#:None}{color=#f00}(1-9 or NUM 1-9){/color}{/a}") xoffset 50 tooltip _("1-9 or NUM 1-9 on choice menus")
+        text _("3. Hotkeys on Confirm using {a=#:None}{color=#f00}(Y/N){/color}{/a}") xoffset 50 tooltip _("Y/N on confirmation screens")
+        text _("Notifications")
+        text _("1. Toggle Notification Stack/Standard using {a=#:None}{color=#f00}(N){/color}{/a} or in preferences menu") xoffset 50 tooltip _("This can be toggled in the main menu or in the game")
+        text _("Credit to {a=https://github.com/RenpyRemix/multi-notify}RenpyRemix{/a} for stackable notifications") xoffset 50 tooltip _("RenpyRemix Github")
+        text _("Credit to {a=https://github.com/valery-iwanofu/renpy-shader-collection}valery-iwanofu{/a} for color picker") xoffset 50 tooltip _("valery-iwanofu Github")
         text ""
         if mod_updated[0] not in ["Mod up-to-date", "JSON Error", "Could Not Connect to Host", "HTTP Error", "Timeout", "Request Error", "None"]:
-            text "Latest MOD update available at {a=[gui.mod_update_url]}[gui.mod_dev]{/a}" tooltip "Mod Developer"
-        text "If you like what I do {a=[gui.donate_mod]}Buy me a beer{/a}" tooltip "Mod Developer BuyMeACoffee Page"
-        text "And lastly {a=[gui.developer_support]}[gui.developer_name]{/a} for developing [config.name!t]" tooltip "Developer Patreon"
+            text _("Latest MOD update available at {a=[gui.mod_update_url]}[gui.mod_dev]{/a}") tooltip _("Mod Developer")
+        text _("If you like what I do consider {a=[gui.donate_mod]}Buying me a beer{/a}") tooltip _("Mod Developer BuyMeACoffee Page")
+        text _("And lastly {a=[gui.developer_support]}[gui.developer_name]{/a} for developing [config.name!t]") tooltip _("Developer Patreon")
 
     screen confirm(message, yes_action, no_action):
 
@@ -456,9 +458,9 @@ init 5:# Screens
             pos (50, 900)
             idle "gui/overlay/main_menu_button_return_idle.png"
             hover "gui/overlay/main_menu_button_return_hover.png"
-            if title == "Walkthrough Colors".capitalize():
+            if title.lower() == _("Walkthrough Colors").lower():
                 action Hide("color_picker_wt", transition=dissolve)
-            elif title == "Music Player Settings".capitalize():
+            elif title.lower() == _("Music Player Settings").lower():
                 action Hide("color_picker_mr", transition=dissolve)
             else:
                 action Return()
@@ -467,17 +469,17 @@ init 5:# Screens
 
         if main_menu:
             key "game_menu":
-                if title == "Walkthrough Colors".capitalize():
+                if title.lower() == _("Walkthrough Colors").lower():
                     action Hide("color_picker_wt", transition=dissolve)
-                elif title == "Music Player Settings".capitalize():
+                elif title.lower() == _("Music Player Settings").lower():
                     action Hide("color_picker_mr", transition=dissolve)
                 else:
                     action ShowMenu("main_menu")
         else:
             key "game_menu":
-                if title == "Walkthrough Colors".capitalize():
+                if title.lower() == _("Walkthrough Colors").lower():
                     action Hide("color_picker_wt", transition=dissolve)
-                elif title == "Music Player Settings".capitalize():
+                elif title.lower() == _("Music Player Settings").lower():
                     action Hide("color_picker_mr", transition=dissolve)
                 else:
                     action Return()
@@ -486,7 +488,7 @@ init 5:# Screens
 
         tag menu
 
-        use game_menu(_("Preferences".capitalize()), scroll="viewport"):
+        use game_menu(_("Preferences"), scroll="viewport"):
 
             vbox:
 
@@ -607,14 +609,6 @@ init 5:# Screens
 
                 hbox:
                     box_wrap True
-
-                    vbox:
-                        style_prefix "check"
-                        label _("Choice Hotkeys\n[jg_s](C)")
-                        textbutton _("Enabled"):
-                            action SetField(persistent, "_choice_hotkeys", True)
-                        textbutton _("Disabled"):
-                            action SetField(persistent, "_choice_hotkeys", False)
                     vbox:
                         style_prefix "check"
                         label _("Walkthrough\n[jg_s](W)")
@@ -630,25 +624,24 @@ init 5:# Screens
                                 action SetField(persistent, "_choice_tooltips", True)
                             textbutton _("Disabled"):
                                 action SetField(persistent, "_choice_tooltips", False)
-
-                    
-                null height (4 * gui.pref_spacing)
-
-                hbox:
-                    box_wrap True
-                    if persistent._walkthrough:
                         vbox:
                             style_prefix "check"
                             label _("Adjust WT Colors\n[jg_s]")
                             textbutton _("Change") action Show("color_picker_wt", transition=dissolve)
+                    vbox:
+                        style_prefix "check"
+                        label _("Choice Hotkeys\n[jg_s](C)")
+                        textbutton _("Enabled"):
+                            action SetField(persistent, "_choice_hotkeys", True)
+                        textbutton _("Disabled"):
+                            action SetField(persistent, "_choice_hotkeys", False)
+
+                null height (4 * gui.pref_spacing)
+
+                hbox:
+                    box_wrap True
+                    
                     if JGSLoadable("music_room") and JGSLoadable("music_room_screen"):
-                        vbox:
-                            style_prefix "check"
-                            label _("Music Volume\n[jg_s]{}".format("Fast" if persistent._fast_vol_music else "Slow"))
-                            textbutton _("Fast"):
-                                action SetField(persistent, "_fast_vol_music", True)
-                            textbutton _("Slow"):
-                                action SetField(persistent, "_fast_vol_music", False)
                         vbox:
                             style_prefix "check"
                             label _("Music Overlay\n[jg_s]{}".format("On" if persistent._music_overlay else "Off"))
@@ -656,13 +649,6 @@ init 5:# Screens
                                 action SetField(persistent, "_music_overlay", True)
                             textbutton _("Off"):
                                 action SetField(persistent, "_music_overlay", False)
-                        vbox:
-                            style_prefix "check"
-                            label _("Music Buttons\n[jg_s]{}".format("Solid" if persistent._use_outline_music_buttons else "Outline"))
-                            textbutton _("Solid"):
-                                action SetField(persistent, "_use_outline_music_buttons", True)
-                            textbutton _("Outline"):
-                                action SetField(persistent, "_use_outline_music_buttons", False)
                     
                 null height (4 * gui.pref_spacing)
 
@@ -723,12 +709,12 @@ init 5:# Screens
         default activate = False
         default option = ""
         default field = ""
-        use game_menu("Walkthrough Colors".capitalize()):
+        use game_menu(_("Walkthrough Colors")):
             vbox:
                 hbox:#Good Choice
                     spacing 15
                     vbox:
-                        textbutton "Good Choice Color":
+                        textbutton _("Good Choice Color"):
                             
                             action If(option == "_good_choice_color", 
                                 true=[SetScreenVariable("activate", False), SetScreenVariable("option", ""), SetScreenVariable("field", "")], 
@@ -736,59 +722,59 @@ init 5:# Screens
                             text_color persistent._good_choice_color
                             text_hover_color adjust_brightness(persistent._good_choice_color, -50)
                     vbox:
-                        textbutton "Reset":
+                        textbutton _("Reset"):
                             action SetField(persistent, "_good_choice_color", persistent._default_good_choice_color) 
                             sensitive persistent._good_choice_color != persistent._default_good_choice_color
                 hbox:#Bad Choice
                     spacing 15
                     vbox:
-                        textbutton "Bad Choice Color":
+                        textbutton _("Bad Choice Color"):
                             action If(option == "_bad_choice_color", 
                                 true=[SetScreenVariable("activate", False), SetScreenVariable("option", ""), SetScreenVariable("field", "")], 
                                 false=[SetScreenVariable("activate", True), SetScreenVariable("option", "_bad_choice_color"), SetScreenVariable("field", "_bad_choice_color")])
                             text_color persistent._bad_choice_color
                             text_hover_color adjust_brightness(persistent._bad_choice_color, -50)
                     vbox:
-                        textbutton "Reset":
+                        textbutton _("Reset"):
                             action SetField(persistent, "_bad_choice_color", persistent._default_bad_choice_color) 
                             sensitive persistent._bad_choice_color != persistent._default_bad_choice_color
                 hbox:#Recommended Choice
                     spacing 15
                     vbox:
-                        textbutton "Recommended Choice Color":
+                        textbutton _("Recommended Choice Color"):
                             action If(option == "_recommended_choice_color", 
                                 true=[SetScreenVariable("activate", False), SetScreenVariable("option", ""), SetScreenVariable("field", "")],  
                                 false=[SetScreenVariable("activate", True), SetScreenVariable("option", "_recommended_choice_color"), SetScreenVariable("field", "_recommended_choice_color")])
                             text_color persistent._recommended_choice_color
                             text_hover_color adjust_brightness(persistent._recommended_choice_color, -50)
                     vbox:
-                        textbutton "Reset":
+                        textbutton _("Reset"):
                             action SetField(persistent, "_recommended_choice_color", persistent._default_recommended_choice_color) 
                             sensitive persistent._recommended_choice_color != persistent._default_recommended_choice_color
                 hbox:#Best Choice
                     spacing 15
                     vbox:
-                        textbutton "Best Choice Color":
+                        textbutton _("Best Choice Color"):
                             action If(option == "_best_choice_color", 
                                 true=[SetScreenVariable("activate", False), SetScreenVariable("option", ""), SetScreenVariable("field", "")], 
                                 false=[SetScreenVariable("activate", True), SetScreenVariable("option", "_best_choice_color"), SetScreenVariable("field", "_best_choice_color")])
                             text_color persistent._best_choice_color
                             text_hover_color adjust_brightness(persistent._best_choice_color, -50)
                     vbox:
-                        textbutton "Reset":
+                        textbutton _("Reset"):
                             action SetField(persistent, "_best_choice_color", persistent._default_best_choice_color) 
                             sensitive persistent._best_choice_color != persistent._default_best_choice_color
                 hbox:#Dealers Choice
                     spacing 15
                     vbox:
-                        textbutton "Good Choice Color":
+                        textbutton _("Dealers Choice Color"):
                             action If(option == "_dealers_choice_color", 
                                 true=[SetScreenVariable("activate", False), SetScreenVariable("option", ""), SetScreenVariable("field", "")], 
                                 false=[SetScreenVariable("activate", True), SetScreenVariable("option", "_dealers_choice_color"), SetScreenVariable("field", "_dealers_choice_color")])
                             text_color persistent._dealers_choice_color
                             text_hover_color adjust_brightness(persistent._dealers_choice_color, -50)
                     vbox:
-                        textbutton "Reset":
+                        textbutton _("Reset"):
                             action SetField(persistent, "_dealers_choice_color", persistent._default_dealers_choice_color) 
                             sensitive persistent._dealers_choice_color != persistent._default_dealers_choice_color
 
@@ -893,12 +879,22 @@ init 5:# Screens
     default persistent._quickmenu_prefs = True
     default persistent._quickmenu_end_replay = True
 
+    transform choice_Q():
+        easein .5 alpha 0.0
+        pause .25
+        easein .5 alpha 1.0
+        repeat 4
+
     screen choice(items):
         $ tooltip = GetTooltip()
         style_prefix "choice"
 
         default walkthrough = ""
         default hint = ""
+        default shown = True
+        default animate = True
+
+        timer 6 action SetLocalVariable("shown", False),SetLocalVariable("animate", False),With(dissolve)
 
         default operators = {
             "<=" : operator.le,   # less than or equal to
@@ -908,15 +904,22 @@ init 5:# Screens
             "==" : operator.eq,   # equal tom
             "!=" : operator.ne,   # not equal
             }
-
-        textbutton "?":
-            action NullAction() 
-            tooltip fix_multiline(wt_choice_tooltip).strip()
-            style "_default"
-            text_style "_default"
-            text_size 50
-            text_outlines [(2, "#0009", 1, 1)]
-            text_color "#FFFFFFA3"
+        mousearea:
+            align 0.0, 0.0
+            xysize (50,50)
+            hovered SetLocalVariable("shown", True),With(dissolve)
+            unhovered SetLocalVariable("shown", False),With(dissolve)
+        if shown:
+            textbutton "?":
+                if animate:
+                    at choice_Q 
+                action NullAction() 
+                tooltip wt_choice_tooltip
+                style "_default"
+                text_style "_default"
+                text_size 50
+                text_outlines [(2, "#0009", 1, 1)]
+                text_color "#FFFFFFA3"
 
         vbox:
             for count, i in enumerate(items, 1):
@@ -1049,7 +1052,7 @@ init 5:# Screens
         default savename = VariableInputValue('save_name', False)
         default the_page = VariableInputValue("_go_to_page", False)
 
-        use game_menu(title.capitalize()):
+        use game_menu(title):
 
             fixed:
                 if persistent._custom_savename:
@@ -1164,13 +1167,13 @@ init 5:# Screens
                 input:
                     style "page_label_text"
                     align (0.0, 0.5)
-                    prefix "Go To Page: "
+                    prefix _("Go To Page: ")
                     allow [str(i) for i in range(0,10)]
                     if gui.use_custom_caret:
                         caret "custom_caret"
                     length 3
                     value the_page
-                textbutton "Go":
+                textbutton _("Go"):
                     text_style "page_label_text"
                     align (1.0,0.5)
                     if _go_to_page.isdigit():
@@ -1184,6 +1187,8 @@ init 5:# Screens
         easein t alpha 1.0
 
     screen callstack():
+        if not jgs_develop:
+            timer .1 action Hide("callstack")
         $ current_line = renpy.get_filename_line()
         $ callstack = renpy.get_return_stack()
         $ mode = renpy.get_mode()
@@ -1193,7 +1198,7 @@ init 5:# Screens
             text _("Mode: [mode]") outlines [(2, "#0009", 1, 1)] color "#0F0"
             if callstack:
                 text _("CallStack: [callstack!q]") outlines [(2, "#0009", 1, 1)] color "#0F0"
-                textbutton "Clear Stack" action Function(renpy.set_return_stack, [])
+                textbutton _("Clear Stack") action Function(renpy.set_return_stack, [])
 
     screen tooltip(tooltip, **kwargs):
         $ f_align = kwargs.get("align", (0.5, 0.05))
@@ -1263,7 +1268,7 @@ init 5:# Screens
 
         vbox:
             pos (35, 880)
-            text _("Do you want to uncensore the background?"):
+            text _("Do you want to Uncensor the background?"):
                 size 25
                 outlines [ (absolute(2), "#0d0d0d", absolute(1), absolute(1)) ]
 

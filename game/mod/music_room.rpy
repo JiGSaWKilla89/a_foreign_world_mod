@@ -2,6 +2,16 @@ default music_last_playing = None
 default stoptrack = None
 default time_position = 0.0
 default time_duration = 0.0
+default persistent._music_icon_idle_color = "#FB4301"
+default persistent._music_icon_hover_color = "#2a2a2a"
+default persistent._music_icon_idle_color_default = "#FB4301"
+default persistent._music_icon_hover_color_default = "#2a2a2a"
+default persistent._music_overlay = True
+default persistent._music_ff_rew = 1.0
+default persistent._start_music_on_enter = True
+default custom_keep_music_playing = False
+default persistent._use_outline_music_buttons = False
+default persistent._music_overlay = True
 
 define ComposerSquadEveningJazz = AudioCredits(
     "Evening Jazz",
@@ -12,6 +22,7 @@ define ComposerSquadEveningJazz = AudioCredits(
     "",
     "",
     "",
+    unlocked=True
     )
 define ComposerSquadFeelMe = AudioCredits(
     "Feel Me",
@@ -289,6 +300,9 @@ init -1000 python:
         for i in range(start, end, step):
             float_list.append(round(i/100, 2))
         return float_list
+
+    def round_float(value):
+        return round(float(value),2)
 
     def float_range(start, stop, step):
         import decimal
@@ -908,7 +922,7 @@ init -1000 python:
 
         dur = self.get_duration()
 
-        value = pos+1.0
+        value = pos+persistent._music_ff_rew
 
         if value >= dur:
             value = dur
@@ -963,7 +977,7 @@ init -1000 python:
         pos = self.get_position()
         dur = self.get_duration()
 
-        value = pos-1.0
+        value = pos-persistent._music_ff_rew
 
         if value < 0.0:
             value = 0.0
@@ -1212,69 +1226,27 @@ init python:
         ])
     aspect_ratio = (config.screen_width, config.screen_height)
 
-define gui.frame_alpha = 0.5
-define gui.frame_color_border = gui.accent_color
-define gui.frame_color_background = "#000"
-define gui.bar_left_color = "#FB4301"
-define gui.bar_right_color = adjust_brightness("#FB4301", -100)
-define gui.bar_bottom_color = gui.bar_right_color
-define gui.bar_top_color = gui.bar_left_color
+init 10 python:
+    def MP_IMG(img,state="idle", size=(gui.button_size,gui.button_size)):
+        return Transform(
+            'mod/images/{}_outline.png'.format(img) if not persistent._use_outline_music_buttons else 'mod/images/{}_solid.png'.format(img),
+            matrixcolor=ColorSingle(getattr(persistent, "_music_icon_{}_color".format(state))),
+            xysize=size,
+            align=(0.5,0.5))
+    
+    def MP_BAR(state):
+        return Frame(Solid(getattr(persistent, "_music_icon_{}_color".format(state))), gui.slider_borders, tile=gui.slider_tile)
 
-define gui.game_menu_navigation_frame_xsize = 420
+    def MP_THUMB(state):
+        return Transform(Solid(getattr(persistent,"_music_icon_{}_color".format(state))),ysize=gui.slider_size, xsize=30)
 
-define gui.musicroom_frame_background = Transform(
-    Frame(
-        "gui/frame.png",
-        gui.frame_borders, tile=gui.frame_tile),
-    matrixcolor=ColorizeMatrix(gui.frame_color_background, gui.frame_color_border),
-    alpha=gui.frame_alpha)
-define gui.musicroom_frame_padding = gui.frame_borders.padding
-define gui.musicroom_frame_xsize = config.screen_width - 420 - (gui.bar_size*3)
-
-
-define gui.music_icon_idle_color = "#FB4301"
-define gui.music_icon_hover_color = adjust_brightness("#FB4301", -100)
-define gui.music_icon_selected_color = gui.selected_color
-define gui.music_icon_insensitive_color = gui.insensitive_color
-define gui.button_size = 33
-define gui.button_size_mute = (50, 33)
-
-define gui.musicroom_text_color = gui.text_color
-define gui.musicroom_text_font = gui.text_font
-define gui.musicroom_text_outlines = [(2, "#0009", 1, 1)]
-
-define gui.musicroom_time_text_font = gui.text_font
-define gui.musicroom_time_size = gui.text_size
-define gui.musicroom_time_text_outlines = [(2, "#0009", 1, 1)]
-
-define gui.musicroom_button_text_font = gui.text_font
-define gui.musicroom_button_text_outlines = [(2, "#0009", 1, 1)]
-define gui.musicroom_button_text_idle_color = "#FB4301"
-define gui.musicroom_button_text_hover_color = adjust_brightness("#FB4301", -100)
-define gui.musicroom_button_text_selected_color = gui.selected_color
-define gui.musicroom_button_text_insensitive_color = gui.insensitive_color
-
-define gui.musicroom_bar_left_idle_color = gui.bar_left_color
-define gui.musicroom_bar_left_hover_color = gui.bar_right_color
-
-define gui.musicroom_bar_right_idle_color = gui.bar_right_color
-define gui.musicroom_bar_right_hover_color = gui.bar_left_color
-
-
-#define gui.musicroom_button_text_idle_outlines = [(2, "#0009", 1, 1)]
-#define gui.musicroom_button_text_hover_outlines = [(2, "#0009", 1, 1)]
-#define gui.musicroom_button_text_selected_outlines = [(2, "#0009", 1, 1)]
-#define gui.musicroom_button_text_insensitive_outlines = [(2, "#0009", 1, 1)]
-
-default persistent._start_music_on_enter = True
-default custom_keep_music_playing = False
-default persistent._use_outline_music_buttons = False
-default persistent._music_overlay = True
+    def MP_TEXT(state):
+        return getattr(persistent, "_music_icon_{}_color".format(state))
 
 init -5 python:
     class AudioCredits:
         TrackInfo = []
-        def __init__(self, title, artist, filename, link_name, link, description, license, lic_link, mood=""):
+        def __init__(self, title, artist, filename, link_name, link, description, license, lic_link, mood="", unlocked=False):
             self.title = title
             self.artist = artist
             self.filename = filename
@@ -1284,6 +1256,9 @@ init -5 python:
             self.license = license
             self.license_link = lic_link
             self.mood = mood
+            self.unlocked = unlocked or seen_track(filename)
+            if unlocked or seen_track(filename):
+                renpy.mark_audio_seen(filename)
             AudioCredits.TrackInfo.append(self)
 
         def __repr__(self):
@@ -1299,6 +1274,24 @@ init 10 python:
 
     # Initialize your musicroom
     mr = MusicRoom(fadeout=1.5, fadein=0.5, loop=True, shuffle=True, single_track=False, channel="music")
+
+    def single_unlock(track):
+        for artist in music_tracks.keys():
+            for trackdata in music_tracks[artist].values():
+                trackdata["unlocked"] = True
+                renpy.mark_audio_seen(track)
+
+        renpy.run(mr.Play(track))
+    
+    def unlock_all_tracks():
+        for artist, data in music_tracks.items():
+            for title, trackdata in data.items():
+                track = trackdata.get("musicroom_path","")
+                if track:
+                    trackdata["unlocked"] = True
+                    renpy.mark_audio_seen(track)
+
+    #len(artist: track)  sum(len(titles) for titles in music_tracks.values())
 
     def find_music():
         data = []
@@ -1322,7 +1315,7 @@ init 10 python:
                     if track[0] != audio.filename:
                         audio.filename = track[0]
                         break
-            data.append([audio.title, audio.artist, audio.filename])
+            data.append([audio.title, audio.artist, audio.filename, audio.unlocked])
 
         return sorted(data)
         #trackname, creator, filename, link, adddescription
@@ -1340,8 +1333,8 @@ init 10 python:
         return sorted_music
 
     def generate_track_list(lst):
-        for title, artist, path in lst:
-            add_to_music_tracks(music_tracks, artist, title, path, True)
+        for title, artist, path, unlocked in lst:
+            add_to_music_tracks(music_tracks, artist, title, path, unlocked)
 
     music_list = find_music()
 
@@ -1372,18 +1365,19 @@ init -5 python:
         if not title in dictionary[artist]:
             dictionary[artist][title] = {}
 
-        locked = dictionary[artist][title].get("unlocked")
+        #locked = dictionary[artist][title].get("unlocked")
 
-        dictionary[artist][title]["path"] = full_path
+        #dictionary[artist][title]["path"] = full_path
         dictionary[artist][title]["musicroom_path"] = path
         dictionary[artist][title]["length"] = track_length
-        if locked == False or locked == None:
-            dictionary[artist][title]["unlocked"] = unlocked
-        else:
-            dictionary[artist][title]["unlocked"] = locked
+        dictionary[artist][title]["unlocked"] = unlocked
+        #if locked == False or locked == None:
+        #    dictionary[artist][title]["unlocked"] = unlocked
+        #else:
+        #    dictionary[artist][title]["unlocked"] = locked
         dictionary[artist][title]["credits_link"] = credits_link
         dictionary[artist][title]["credits_license"] = credits_license
-        dictionary[artist][title]["custom"] = custom
+        #dictionary[artist][title]["custom"] = custom
 
     def add_to_playlist(musicroom):
         for artist, data in music_tracks.items():
@@ -2560,3 +2554,57 @@ image unlocked_button_insensitive = ConditionSwitch(
     "not persistent._use_outline_music_buttons", " unlocked_outline_insensitive",
     "persistent._use_outline_music_buttons", " unlocked_solid_insensitive",
 )
+
+define gui.frame_alpha = 0.5
+define gui.frame_color_border = gui.accent_color
+define gui.frame_color_background = "#000"
+define gui.bar_left_color = "#FB4301"
+define gui.bar_right_color = adjust_brightness("#FB4301", -100)
+define gui.bar_bottom_color = gui.bar_right_color
+define gui.bar_top_color = gui.bar_left_color
+
+define gui.game_menu_navigation_frame_xsize = 420
+
+define gui.musicroom_frame_background = Transform(
+    Frame(
+        "gui/frame.png",
+        gui.frame_borders, tile=gui.frame_tile),
+    matrixcolor=ColorizeMatrix(gui.frame_color_background, gui.frame_color_border),
+    alpha=gui.frame_alpha)
+define gui.musicroom_frame_padding = gui.frame_borders.padding
+define gui.musicroom_frame_xsize = config.screen_width - 420 - (gui.bar_size*3)
+
+
+define gui.music_icon_idle_color = "#FB4301"
+define gui.music_icon_hover_color = adjust_brightness("#FB4301", -100)
+define gui.music_icon_selected_color = gui.selected_color
+define gui.music_icon_insensitive_color = gui.insensitive_color
+define gui.button_size = 33
+define gui.button_size_mute = (50, 33)
+
+define gui.musicroom_text_color = gui.text_color
+define gui.musicroom_text_font = gui.text_font
+define gui.musicroom_text_outlines = [(2, "#0009", 1, 1)]
+
+define gui.musicroom_time_text_font = gui.text_font
+define gui.musicroom_time_size = gui.text_size
+define gui.musicroom_time_text_outlines = [(2, "#0009", 1, 1)]
+
+define gui.musicroom_button_text_font = gui.text_font
+define gui.musicroom_button_text_outlines = [(2, "#0009", 1, 1)]
+define gui.musicroom_button_text_idle_color = "#FB4301"
+define gui.musicroom_button_text_hover_color = adjust_brightness("#FB4301", -100)
+define gui.musicroom_button_text_selected_color = gui.selected_color
+define gui.musicroom_button_text_insensitive_color = gui.insensitive_color
+
+define gui.musicroom_bar_left_idle_color = gui.bar_left_color
+define gui.musicroom_bar_left_hover_color = gui.bar_right_color
+
+define gui.musicroom_bar_right_idle_color = gui.bar_right_color
+define gui.musicroom_bar_right_hover_color = gui.bar_left_color
+
+
+#define gui.musicroom_button_text_idle_outlines = [(2, "#0009", 1, 1)]
+#define gui.musicroom_button_text_hover_outlines = [(2, "#0009", 1, 1)]
+#define gui.musicroom_button_text_selected_outlines = [(2, "#0009", 1, 1)]
+#define gui.musicroom_button_text_insensitive_outlines = [(2, "#0009", 1, 1)]
