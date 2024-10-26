@@ -1,6 +1,6 @@
 I have created a Multi-Mod with walkthrough for A Foreign World by [Highborn Tiger](https://www.patreon.com/HighbornTiger)
 
-![screenshot](Screenshots/01_main_menu.jpg)
+![screenshot](screenshots/01_main_menu.jpg)
 
 Mod Features:
   1. Walkthough with Suggestions. Not Really Required but just my best suggestions
