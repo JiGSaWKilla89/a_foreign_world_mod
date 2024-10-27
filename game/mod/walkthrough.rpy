@@ -70,7 +70,7 @@ init 1000 python:
                     "color" : pink
                     },
                 },
-            ('e1.rpyc', 4947) : {
+            ('e1.rpyc', 4952) : {
                 "Let your dark thoughts take over" : {
                     "wt" : "",
                     "hint" : [f"{_recc}"],
@@ -152,7 +152,7 @@ init 1000 python:
                     "hint" : [],
                     },
                 },
-            ('e2.rpyc', 1110) : {
+            ('e2.rpyc', 1132) : {
                 "Stay and listen" : {
                     "wt" : "",
                     "hint" : [f"{_recc}", 
@@ -167,7 +167,7 @@ init 1000 python:
                     "hint" : ["d3_lucy_interrupt added to choices"],
                     },
                 },
-            ('e2.rpyc', 1464) : {
+            ('e2.rpyc', 1486) : {
                 "Pretend you didn't notice" : {
                     "wt" : "",
                     "hint" : [f"{_recc}", ],
@@ -178,7 +178,7 @@ init 1000 python:
                     "hint" : [],
                     },
                 },
-            ('e2.rpyc', 1471) : {
+            ('e2.rpyc', 1493) : {
                 "Let her continue" : {
                     "wt" : "",
                     "hint" : [f"{_recc}", ],
@@ -189,7 +189,7 @@ init 1000 python:
                     "hint" : [],
                     },
                 },
-            ('e2.rpyc', 1485) : {
+            ('e2.rpyc', 1507) : {
                 "That's it" : {
                     "wt" : f"",
                     "hint" : [],
@@ -200,49 +200,49 @@ init 1000 python:
                     "color" : yellow
                     },
                 },
-            ('e2.rpyc', 1501) : {
-                "Okay" : {
-                    "wt" : "",
-                    "hint" : [f"{_recc}", ],
-                    "color" : yellow
-                    },
-                },
-            ('e2.rpyc', 1557) : {
+            ('e2.rpyc', 1523) : {
                 "Let her continue" : {
                     "wt" : "",
                     "hint" : [f"{_recc}", ],
                     "color" : yellow
                     },
                 },
-            ('e2.rpyc', 1600) : {
+            ('e2.rpyc', 1579) : {
+                "Let her continue" : {
+                    "wt" : "",
+                    "hint" : [f"{_recc}", ],
+                    "color" : yellow
+                    },
+                },
+            ('e2.rpyc', 1622) : {
                 "Let her do her thing" : {
                     "wt" : "",
                     "hint" : [f"{_recc}", ],
                     "color" : yellow
                     },
                 },
-            ('e2.rpyc', 1644) : {
+            ('e2.rpyc', 1666) : {
                 "Think about what could have been" : {
                     "wt" : "",
                     "hint" : [f"{_recc}", ],
                     "color" : yellow
                     },
                 },
-            ('e2.rpyc', 1877) : {
+            ('e2.rpyc', 1899) : {
                 "Ask her what she was about to say" : {
                     "wt" : "",
                     "hint" : [f"{_recc}", ],
                     "color" : yellow
                     },
                 },
-            ('e2.rpyc', 1973) : {
+            ('e2.rpyc', 1995) : {
                 "Give in and kiss her" : {
                     "wt" : "",
                     "hint" : [f"{_recc}", "d4_sue_kiss added to choices"],
                     "color" : yellow
                     },
                 },
-            ('e2.rpyc', 2175) : {
+            ('e2.rpyc', 2197) : {
                 "Ask her about abilities" : {
                     "wt" : "",
                     "hint" : [f"{_recc}", "d4_training_detail added to choices", "oldman_heard added to memories"],
@@ -253,28 +253,28 @@ init 1000 python:
                     "hint" : ["oldman_heard added to memories"],
                     },
                 },
-            ('e2.rpyc', 2886) : {
+            ('e2.rpyc', 2908) : {
                 "Tell me" : {
                     "wt" : "",
                     "hint" : [f"{_recc}", "d4_amber_tell_me added to choices"],
                     "color" : yellow
                     },
                 },
-            ('e2.rpyc', 2973) : {
+            ('e2.rpyc', 2995) : {
                 "Discuss things in detail" : {
                     "wt" : "",
                     "hint" : [f"{_recc}", "d4_discussion_detail added to choices"],
                     "color" : yellow
                     },
                 },
-            ('e2.rpyc', 3862) : {
+            ('e2.rpyc', 3884) : {
                 "Let her do her thing" : {
                     "wt" : "",
                     "hint" : [f"{_recc}", "d4_sue_sex added to choices"],
                     "color" : yellow
                     },
                 },
-            ('e2.rpyc', 4170) : {
+            ('e2.rpyc', 4192) : {
                 "Let your mind wander" : {
                     "wt" : "",
                     "hint" : [f"{_recc}", ],
@@ -493,6 +493,72 @@ init 1000 python:
                     },
                 },
             
+            ('e6.rpyc', 312) : {
+                "You can ask your questions" : {
+                    "wt" : "",
+                    "hint" : [f"{_dech} {_recc}", "d11_amber_moreInfo added to choices"],
+                    "color" : pink
+                    },
+                },
+            ('e6.rpyc', 557) : {
+                "Keep yourself as short as possible" : {
+                    "wt" : "",
+                    "hint" : [f"{_dech}", "d11_discussion_lessInfo added to choices", "Less reading"],
+                    "color" : pink
+                    },
+                "Lay out your plan" : {
+                    "wt" : "",
+                    "hint" : [f"{_dech} {_recc}", "d11_discussion_moreInfo added to choices", "More reading for the reader"],
+                    "color" : pink
+                    },
+                },
+            ('e6.rpyc', 1434) : {
+                "Find [Sue]" : {
+                    "wt" : "",
+                    "hint" : [f"{_dech} {_recc}", "d11_sue_sex added to choices"],
+                    "color" : pink
+                    },
+                "Find [Tracy]" : {
+                    "wt" : "",
+                    "hint" : [f"{_dech}", "d11_tracy_walk added to choices"],
+                    "color" : pink
+                    },
+                "Do Math" : {
+                    "wt" : "",
+                    "hint" : [f"{_dech}", "d11_math added to choices"],
+                    "color" : pink
+                    },
+                "Meditate" : {
+                    "wt" : "",
+                    "hint" : [f"{_dech}", "d11_meditate added to choices"],
+                    "color" : pink
+                    },
+                },
+            ('e6.rpyc', 1642) : {
+                "Be rough" : {
+                    "wt" : "",
+                    "hint" : [f"{_dech}", "d11_sue_sex_rough added to choices"],
+                    "color" : pink
+                    },
+                "Surprise her and be gentle" : {
+                    "wt" : "",
+                    "hint" : [f"{_dech} {_recc}", "d11_sue_sex_tame added to choices"],
+                    "color" : pink
+                    },
+                },
+            ('e6.rpyc', 2275) : {
+                "But I am romantically interested" : {
+                    "wt" : "",
+                    "hint" : [f"{_dech} {_recc}", "d11_tracy_accept added to memories"],
+                    "color" : pink
+                    },
+                "You're right. I'm not" : {
+                    "wt" : "",
+                    "hint" : [f"{_dech} {_recc}", "d11_tracy_reject added to memories"],
+                    "color" : pink
+                    },
+                },
+            
             ('game/mod/replays.rpy', 210) : {
                 "Cum inside" : {
                     "wt" : f"",
@@ -526,31 +592,42 @@ init 1000 python:
                     "color" : yellow
                     },
                 },
+            ('game/mod/replays.rpy', 1946) : {
+                "Be rough" : {
+                    "wt" : "",
+                    "hint" : [f"{_dech}", "d11_sue_sex_rough added to choices"],
+                    "color" : pink
+                    },
+                "Surprise her and be gentle" : {
+                    "wt" : "",
+                    "hint" : [f"{_dech} {_recc}", "d11_sue_sex_tame added to choices"],
+                    "color" : pink
+                    },
+                },
             }
 
     valid_dic_items = [#Changes Every Update
-        ('e1.rpyc', 2485), ('e2.rpyc', 809), ('e2.rpyc', 922),
-        ('e2.rpyc', 1464), ('e2.rpyc', 1557), ('e2.rpyc', 1471),
-        ('e2.rpyc', 1501), ('e2.rpyc', 1485), ('e3.rpyc', 2018),
-        ('e3.rpyc', 2032)
+        ('e2.rpyc', 809), ('e2.rpyc', 1486),
+        ('e2.rpyc', 1493), ('e2.rpyc', 1507),
+        ('e3.rpyc', 2018)
         ]
 
     e1_ignore_lines = [#Changes Every Update
-        2486
         ]
     e2_ignore_lines = [#Changes Every Update
-        923
         ]
     e3_ignore_lines = [#Changes Every Update
-        2019
         ]
     e4_ignore_lines = [#Changes Every Update
         ]
     e5_ignore_lines = [#Changes Every Update
         7, 1602, 1605, 4859
         ]
+    e6_ignore_lines = [#Changes Every Update
+        6
+        ]
     screens_ignore_lines = [#Changes Every Update
-        319, 449, 480, 743, 809, 1806
+        319, 449, 480, 743, 809, 1808
         ]
  
     ignore_list = [
@@ -610,7 +687,7 @@ init 1000 python:
                     if i >= r_count:
                         # Search backwards from the current line to find the nearest `menu`
                         for j in range(i, -1, -1):
-                            if 'menu' in lines[j]:
+                            if 'menu:' in lines[j]:
                                 # Calculate distance from `r_count` to the found `menu`
                                 distance = abs(r_count - j)
                                 if distance < min_distance:
@@ -626,7 +703,7 @@ init 1000 python:
                 if name in line:
                     # Search backwards from the current line
                     for j in range(i, -1, -1):
-                        if 'menu' in lines[j]:
+                        if 'menu:' in lines[j]:
                             if out:
                                 print(f"Found {name} in {line.strip()} at {i+1}")
                             # Return the line number (1-indexed)
@@ -808,7 +885,7 @@ init -2000 python early:
             print(f"Folder moved from {folder} to {new_folder}")
         except Exception as e:
             print(f"Error: {e}")
-    clean_root()
+    #clean_root()
 
 #check_dic(walkthrough_dict(),[("sc", "script", "script.rpy")])
 

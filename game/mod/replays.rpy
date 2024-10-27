@@ -70,6 +70,11 @@ define replay_9 = ReplayData(
     "galleryscene9", 
     _("Threesome"),
     scope={"MC" : persistent._replay_name})
+define replay_10 = ReplayData(
+    "d11_sue_12", 
+    "galleryscene10", 
+    _("Sue Sex"),
+    scope={"MC" : persistent._replay_name})
             
 
 style replays_text:
@@ -1579,7 +1584,6 @@ label galleryscene8:
             $ renpy.end_replay()
 
 
-
 label galleryscene9:
     scene d10_threesome_30 with dissolve
     "[Sue] quickly climbs over your legs and removes [Tracy]'s shirt. She wants to make sure [Tracy] doesn’t have time to change her mind."
@@ -1844,4 +1848,349 @@ label galleryscene9:
     mc "(That's way better than coffee.)"
     "This short little scare woke you up from your tired state."
     mc "(I forget that [Sue] probably wouldn't mind getting pregnant.)"
+    $ renpy.end_replay()
+
+
+label galleryscene10:
+    show d11_sue_12 with fade
+    "The moment your alone, [Sue] slides her hands under your shirt."
+
+    if "d4_sue_sex" in choices or "d9_sue_sex" in choices:
+        mc "Greedy as always..."
+
+    mc "It must have been hard laying still while [Sally] pretended you weren't there."
+    su "I know when to hold back."
+    mc "You're not holding back now, are you."
+    su "No."
+
+    show d11_sue_13 with dissolve
+    mc "What do you want, [Sue]?"
+
+    show d11_sue_14 with dissolve
+    su "I want to please you, [MC]."
+    mc "That's not what I meant."
+    mc "You must have dirty thoughts. What's going through your head when you see me?"
+    su "I think about you grabbing me."
+
+    show d11_sue_15_01 with dissolve
+    "You take her waist and pull her closer."
+    mc "Like this?"
+
+    show d11_sue_15_02 with dissolve
+    su "Not quite..."
+    mc "(Still a bit too tame, is it?)"
+    mc "(How about this then?)"
+
+    show d11_sue_16 with dissolve
+
+    mc "Like this?"
+    "[Sue] nods."
+    mc "Go on. Do we kiss in your fantasy?"
+    su "You can kiss me if you want."
+    mc "(If I want? That's a no then. Come on, [Sue]. You know better than this.)"
+
+    show d11_sue_17 with dissolve
+    "You gently squeeze." with vpunch
+    "[Sue] has some physical enhancement mixed into her ability. This little wouldn't hurt a normal person, and compared to them she is much stronger."
+    "Then again, you've copied [Tracy]'s ability. If you gave it your all, she'd be in trouble."
+    "You feel her gulp."
+    mc "How did your fantasy continue? I think I didn't hear you."
+
+    show d11_sue_18 with dissolve
+    pause(1)
+    su "You threw me on the bed."
+    mc "Say it all."
+
+    hide d11_sue_17
+    hide d11_sue_18 with dissolve
+    su "You ripped off my clothes and fucked me."
+    mc "And ruined the clothes I bought?"
+    "[Sue] tries to nod."
+    mc "Well we can't do that, can we?"
+
+    show d11_sue_17 with dissolve
+    su "No."
+    su "You held my neck and asked me to strip out of my trousers. You forced your other hand into my mouth making me gag. Then you used my spit to lube up your cock."
+    mc "Such a dirty mind. You must like it rough."
+
+    show d11_sue_19 with dissolve
+    su "Yes."
+    mc "The next time I might need to bring some rope."
+    "[Sue] nods."
+    "You smile."
+
+
+    scene d11_sue_19 with fade
+    mc "Then let's get to it."
+
+    show d11_sue_20 with vpunch
+    "You release [Sue]'s neck and push her away."
+
+    show d11_sue_21 with dissolve
+
+    pause
+    mc "Strip."
+
+
+    show d11_sue_22 with dissolve
+    mc "Wait."
+
+    show d11_sue_23 with dissolve
+    pause
+    mc "Slower."
+    show d11_sue_24 with dissolve
+    pause
+    show d11_sue_25 with dissolve
+    pause
+
+
+
+    show d11_sue_26_02 with fade
+    pause
+
+    menu:
+        "Be rough" if True:
+            #$ choices.append("d11_sue_sex_rough")
+
+
+            show d11_sue_27 with dissolve
+            su "Ah!"
+            "You push her onto the bed."
+
+            show d11_sue_28 with vpunch
+            "She looks a little frightened."
+            "You can't tell if it's an act."
+
+
+            show d11_sue_29 with dissolve
+            "It doesn't matter."
+            mc "Be a good girl and wait."
+            "You finish undressing in front of her eyes."
+
+            show d11_sue_30 with dissolve
+            mc "There we go."
+            "When you climb onto the bed, [Sue] instinctively moves away."
+
+            show d11_sue_31 with dissolve
+            mc "Where are you going?"
+            su "It's..."
+            su "I don't know."
+            mc "Come here."
+
+            show d11_sue_32 with dissolve
+            "Once she's within reach, you grab her head and kiss her."
+            "Her tongue gives her away. She is very much into this."
+            mc "Check if you are wet."
+            su "I am."
+            mc "Check anyway."
+
+            show d11_sue_33 with dissolve
+
+            su "Here."
+            mc "Good girl."
+            mc "Now spread your legs so I can fuck your cunt."
+            mc "I know you can't wait to feel my dick inside you."
+            su "Yes, [MC]."
+
+
+
+            show d11_sue_34 with dissolve
+            mc "Who is a good girl?"
+            su "Me."
+            "With that you push your dick inside her."
+
+            show d11_sue_35 with fade
+            su "Ahhhhhh!"
+            "Screw taking it easy. She is wet anyway, so you go fast right away."
+            "[Sue] has a hard time holding back."
+
+
+            show d11_sue_36 with Dissolve(1.5)
+            "Her moans can be heard outside the room."
+            am "Why don't we go downstairs?"
+            mo "Yes!"
+
+
+            hide d11_sue_36 with dissolve
+            su "Mmmmhhh..."
+            mc "You're too loud."
+            "[Sue] is looking around. She can't find anything to muffle her moans."
+            "Of course, she wouldn't bite into your pillow. It's yours after all."
+
+            show d11_sue_37 with dissolve
+            hide d11_sue_35
+
+            mc "That won't do."
+
+            show d11_sue_38 with dissolve
+            "You pull out your dick."
+            "[Sue] would like to protest, but right now you're the one who is fucking, and she is supposed to lay there and take it."
+
+            show d11_sue_39 with dissolve
+            mc "Open your mouth."
+
+            show d11_sue_40 with dissolve
+
+            mc "(So obidient.)"
+            "You use her panties as a gag."
+
+            show d11_sue_41 with dissolve
+
+            mc "That's better."
+
+            show d11_sue_35 with fade
+            "You're back inside her."
+            "[Sue] has a dirty mind. She must have thought of using panties as a gag."
+            "She didn't expect it in the moment, though."
+            "Her moans are muffled."
+            mc "Such a beautiful little pussy."
+            mc "The next time we spar, and I pin you down..."
+            mc "Are you going to spread your legs then too?"
+
+            show d11_sue_42 with dissolve
+            hide d11_sue_35
+            mc "Don't look away."
+            mc "Show me your eyes."
+
+            show d11_sue_43 with dissolve
+            mc "I'm going to cum on your face."
+            "[Sue] nods."
+            mc "You can use your panties to whipe it away."
+            mc "Of course, you can also eat it. I don't care."
+            show d11_sue_35 with fade
+            pause
+            show black with dissolve
+            pause(1)
+            show d11_sue_44 with flash
+            pause
+        "Surprise her and be gentle" if True:
+            #$ choices.append("d11_sue_sex_tame")
+
+
+            show d11_sue_45 with fade
+            "You kiss the back of her hand."
+            mc "Let's not do this today."
+            "[Sue] nods."
+
+            mc "Do you also have a wholesome fantasy?"
+
+            show d11_sue_46 with dissolve
+            "[Sue] blushes."
+            mc "(That's a no, then.)"
+            mc "(Or maybe it's too wholesome.)"
+            mc "I do."
+
+            show d11_sue_47 with dissolve
+            pause
+            show d11_sue_48 with dissolve
+            pause
+            show d11_sue_49_02 with dissolve
+
+
+
+
+
+            su "That's good too."
+            mc "Is it?"
+            pause(1)
+            "You smile."
+            mc "I think it is."
+
+
+
+            hide d11_sue_48
+            show d11_sue_48 with dissolve
+            mc "Do you think you are ready, or do we need lube?"
+            su "What do you mean?"
+
+
+            show d11_sue_50 with dissolve
+            mc "Are you wet?"
+            su "Yes. You can fuck me."
+            mc "I can sleep with you."
+            su "That's what I said."
+            mc "No."
+
+
+            hide d11_sue_49_02
+            show d11_sue_49_02 with dissolve
+            mc "Let me show you the difference."
+            su "Please do."
+            mc "Never speechless."
+            mc "I love that about you."
+
+
+
+            show d11_sue_51 with dissolve
+            mc "You're sensitive. We are going to use that."
+
+
+            show d11_sue_52 with dissolve
+            "[Sue] feels your dick gently resting on her pussy."
+            "Greedy for stimulation, she moves her pelvis."
+            "You give her what she wants and put it in."
+            mc "Better?"
+            su "Are you going to tease me?"
+            mc "I told what we were going to do."
+            mc "There is no rush in making love."
+            "Even though you say that, you don't intent do let her wait for long."
+
+
+            show d11_sue_35 with fade
+            "You go in for a kiss, and as you do you begin to move."
+            su "Mmmmhhh..."
+            "This would have been a moan if it wasn't for the kiss."
+            "Your gentle thrusts are doing the trick. [Sue] is slowly losing herself in the pleasure."
+            "The same goes for you."
+            "While your mind was still trying to explore all kinds of scenarios, you managed to tame it."
+
+
+            show d11_sue_53 with Dissolve(2)
+
+            "You focus on her lips. There are many things she can do with that mouth but all of them don't matter. Her delicate lips are soft to the touch."
+            "A tongue that likes to explore. [Sue] understood the assingment and turned down the naughtiness. That doesn't mean your tongues don't touch every now and then."
+            "Her breath tingles on your skin. She's reluctant to part from you, but both of you need air."
+
+
+            "Her thighs are gently rubbing at your belly, while you keep thrusting."
+
+
+            hide d11_sue_53 with Dissolve(1)
+            "Every sensation can be explored."
+            "Your mind is running circles, but you don't care at all."
+            "Let it think about whether you can acutually feel the mountains and valleys of her vagina every you fully enter, and your crotch is pressing against hers."
+            "Think about it twice. There is no answer. With [Tracy]'s ability it might be possible, but maybe you are just imagining it."
+
+            su "[MC]..."
+            mc "[Sue]."
+            su "Thank you."
+
+
+            show d11_sue_54 with dissolve
+            "You could tell her that she is welcome. Instead you playfully lick her face."
+            "[Sue] smiles."
+
+
+
+            hide d11_sue_54 with dissolve
+
+            mc "I'm about to cum."
+            su "[MC]?"
+            mc "What is it?"
+            su "Please cum inside me."
+            pause(1)
+            mc "I can't do that."
+
+            show d11_sue_55 with dissolve
+            "[Sue] looks dejected."
+            su "Okay."
+
+
+            show d11_sue_56 with dissolve
+            "You pull out and finish on her belly."
+
+
+    #$ memory.append("d11_sue_sex")
+
+    stop music fadeout 2
     $ renpy.end_replay()

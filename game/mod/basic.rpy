@@ -10,10 +10,10 @@
 ##################################################################################################
 init 1:#Mod Defaults
     define gui.mod_dev = "JiGSaW Games Studios"
-    define gui.jg_mod_version = 'Episode-5'
+    define gui.jg_mod_version = 'Episode-5.5'
     define gui.mod_update_version = 1
     define gui.dev_mod_page = "a_foreign_world_mod"
-    define gui.mod_update_date = "17/10/2024"
+    define gui.mod_update_date = "27/10/2024"
     define gui.mod_update_url = "https://github.com/JiGSaWKilla89/{}/releases".format(gui.dev_mod_page)
     define gui.mod_check_url = "https://raw.githubusercontent.com/JiGSaWKilla89/{}/main/version".format(gui.dev_mod_page)
     define gui.donate_mod = "https://buymeacoffee.com/jigsawgames"
@@ -22,6 +22,7 @@ init 1:#Mod Defaults
     define gui.developer_support = "https://www.patreon.com/HighbornTiger"
     default mod_changelog = read_changelog()
     default mod_updated = "None", gui.jg_mod_version
+    default jgs_develop = False
 
     define gui.mod_info_size = gui.title_text_size-20
     define gui.mod_savename_input_size = gui.text_size-10
