@@ -25,4 +25,4 @@ Drop the contents into game folder
 
 If the mod is installed correctly it will show on the main menu mod installed
 
-The Current Mod Version is **episode-5**
+The Current Mod Version is **episode-5.5**
