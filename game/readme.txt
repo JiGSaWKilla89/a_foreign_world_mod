@@ -1,7 +1,7 @@
 Drop this file in your root of the game directory
 
 Example:
-C:\Games\AForeignWorld-Episode-5-pc\
+C:\Games\AForeignWorld-Episode-5.5-pc\
 
 I have created a Multi-Mod with walkthrough for A Foreign World by Highborn Tiger
 
@@ -24,8 +24,13 @@ The mod works without modifying any of the original files so theoretically it sh
 
 The other options should work without a hitch but will be tested on every release.
 
+If a new version is released the walkthrough will be out of sync. But it will not affect the way the game
+plays. None of the original files is touched.
+
+If there is an internet connection available the mod will check if updates available.
+
 Drop the contents into game folder
 
 If the mod is installed correctly it will show on the main menu mod installed
 
-The Current Mod Version is **episode-5**
+The Current Mod Version is **episode-5.5**
